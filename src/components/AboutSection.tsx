@@ -1,5 +1,5 @@
 
-import { BookOpen, Code, Database, Layers, Users, Calendar, Rocket } from 'lucide-react';
+import { BookOpen, Code, Database, Layers, Users, Calendar, Rocket, Globe } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 
 const AboutSection = () => {

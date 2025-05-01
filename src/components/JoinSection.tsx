@@ -1,5 +1,5 @@
 
-import { Phone, CalendarDays, Mail } from 'lucide-react';
+import { Phone, CalendarDays, Mail, Users, Code } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const JoinSection = () => {
