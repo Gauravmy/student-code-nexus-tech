@@ -1,12 +1,13 @@
 
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, Code, BookOpen } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -15,6 +16,12 @@ const Navbar = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  const handleWhatsAppClick = () => {
+    window.open('https://wa.me/917668759906', '_blank');
+  };
+
+  const isHomePage = location.pathname === '/';
 
   return (
     <header 
@@ -35,21 +42,48 @@ const Navbar = () => {
 
           {/* Desktop navigation */}
           <div className="hidden md:flex items-center space-x-8">
-            <a href="#home" className="text-sm font-medium hover:text-techhub-purple transition-colors">
+            <Link 
+              to="/" 
+              className={`text-sm font-medium hover:text-techhub-purple transition-colors ${
+                location.pathname === '/' ? 'text-techhub-purple' : ''
+              }`}
+            >
               Home
-            </a>
-            <a href="#about" className="text-sm font-medium hover:text-techhub-purple transition-colors">
-              About
-            </a>
-            <a href="#team" className="text-sm font-medium hover:text-techhub-purple transition-colors">
-              Team
-            </a>
-            <a href="#join" className="text-sm font-medium hover:text-techhub-purple transition-colors">
-              Join Us
-            </a>
-            <Button className="bg-techhub-purple hover:bg-techhub-light-purple">
-              <BookOpen className="mr-2 h-4 w-4" />
+            </Link>
+            {isHomePage ? (
+              <a 
+                href="#about" 
+                className="text-sm font-medium hover:text-techhub-purple transition-colors"
+              >
+                About
+              </a>
+            ) : (
+              <Link 
+                to="/#about" 
+                className="text-sm font-medium hover:text-techhub-purple transition-colors"
+              >
+                About
+              </Link>
+            )}
+            <Link 
+              to="/sessions" 
+              className={`text-sm font-medium hover:text-techhub-purple transition-colors ${
+                location.pathname === '/sessions' ? 'text-techhub-purple' : ''
+              }`}
+            >
               Sessions
+            </Link>
+            <Link 
+              to="/join" 
+              className={`text-sm font-medium hover:text-techhub-purple transition-colors ${
+                location.pathname === '/join' ? 'text-techhub-purple' : ''
+              }`}
+            >
+              Join Us
+            </Link>
+            <Button className="bg-techhub-purple hover:bg-techhub-light-purple" onClick={handleWhatsAppClick}>
+              <BookOpen className="mr-2 h-4 w-4" />
+              Join Now
             </Button>
           </div>
 
@@ -72,37 +106,56 @@ const Navbar = () => {
         {isMenuOpen && (
           <div className="md:hidden mt-4 py-4 animate-fade-in">
             <div className="flex flex-col space-y-4">
-              <a 
-                href="#home" 
-                className="text-base font-medium hover:text-techhub-purple transition-colors"
+              <Link 
+                to="/" 
+                className={`text-base font-medium hover:text-techhub-purple transition-colors ${
+                  location.pathname === '/' ? 'text-techhub-purple' : ''
+                }`}
                 onClick={() => setIsMenuOpen(false)}
               >
                 Home
-              </a>
-              <a 
-                href="#about" 
-                className="text-base font-medium hover:text-techhub-purple transition-colors"
+              </Link>
+              {isHomePage ? (
+                <a 
+                  href="#about" 
+                  className="text-base font-medium hover:text-techhub-purple transition-colors"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  About
+                </a>
+              ) : (
+                <Link 
+                  to="/#about" 
+                  className="text-base font-medium hover:text-techhub-purple transition-colors"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  About
+                </Link>
+              )}
+              <Link 
+                to="/sessions" 
+                className={`text-base font-medium hover:text-techhub-purple transition-colors ${
+                  location.pathname === '/sessions' ? 'text-techhub-purple' : ''
+                }`}
                 onClick={() => setIsMenuOpen(false)}
               >
-                About
-              </a>
-              <a 
-                href="#team" 
-                className="text-base font-medium hover:text-techhub-purple transition-colors"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Team
-              </a>
-              <a 
-                href="#join" 
-                className="text-base font-medium hover:text-techhub-purple transition-colors"
+                Sessions
+              </Link>
+              <Link 
+                to="/join" 
+                className={`text-base font-medium hover:text-techhub-purple transition-colors ${
+                  location.pathname === '/join' ? 'text-techhub-purple' : ''
+                }`}
                 onClick={() => setIsMenuOpen(false)}
               >
                 Join Us
-              </a>
-              <Button className="bg-techhub-purple hover:bg-techhub-light-purple w-full">
+              </Link>
+              <Button className="bg-techhub-purple hover:bg-techhub-light-purple w-full" onClick={() => {
+                handleWhatsAppClick();
+                setIsMenuOpen(false);
+              }}>
                 <BookOpen className="mr-2 h-4 w-4" />
-                Sessions
+                Join Now
               </Button>
             </div>
           </div>

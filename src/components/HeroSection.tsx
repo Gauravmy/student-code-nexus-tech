@@ -3,24 +3,41 @@ import { Code2, Code, Laptop, Users, Globe } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const HeroSection = () => {
+  const scrollToSection = (id: string) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  const openWhatsApp = () => {
+    window.open('https://wa.me/917668759906', '_blank');
+  };
+
   return (
     <section id="home" className="pt-20 md:pt-28 pb-16 md:pb-24">
       <div className="container mx-auto px-6">
         <div className="flex flex-col lg:flex-row lg:items-center">
           <div className="lg:w-1/2 lg:pr-10 mb-10 lg:mb-0 order-2 lg:order-1 animate-fade-in">
             <h1 className="text-4xl md:text-5xl font-bold leading-tight mb-6">
-              Join the Best Student <span className="text-gradient">Tech Community</span> for DSA & Web Dev
+              Welcome to <span className="text-gradient">Tech Hub</span> — Your Coding Community!
             </h1>
             <p className="text-lg mb-8 text-gray-600 max-w-2xl">
-              A global student-led community dedicated to mastering Data Structures & Algorithms 
-              and web development through collaborative practice sessions.
+              Daily DSA sessions • Weekend Web Dev workshops • Global active members
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button className="bg-techhub-purple hover:bg-techhub-light-purple text-white px-8 py-6 rounded-lg">
-                Learn More
+              <Button 
+                className="bg-techhub-purple hover:bg-techhub-light-purple text-white px-8 py-6 rounded-lg"
+                onClick={openWhatsApp}
+              >
+                Join Now
               </Button>
-              <Button variant="outline" className="border-techhub-purple text-techhub-purple hover:bg-techhub-soft-purple py-6">
-                Join Community
+              <Button 
+                variant="outline" 
+                className="border-techhub-purple text-techhub-purple hover:bg-techhub-soft-purple py-6"
+                onClick={() => scrollToSection('about')}
+              >
+                Learn More
               </Button>
             </div>
             

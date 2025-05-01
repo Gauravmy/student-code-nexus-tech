@@ -6,6 +6,7 @@ import TeamSection from "@/components/TeamSection";
 import JoinSection from "@/components/JoinSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import EventsSection from "@/components/EventsSection";
+import PlatformsSection from "@/components/PlatformsSection";
 import Footer from "@/components/Footer";
 
 const Index = () => {
@@ -14,6 +15,7 @@ const Index = () => {
       <Navbar />
       <HeroSection />
       <AboutSection />
+      <PlatformsSection />
       <TeamSection />
       <TestimonialsSection />
       <EventsSection />

@@ -5,6 +5,10 @@ import { Code, Mail, Phone, MapPin, Github, Linkedin, Twitter, Instagram } from 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
   
+  const handleWhatsAppClick = () => {
+    window.open('https://wa.me/917668759906', '_blank');
+  };
+  
   return (
     <footer className="bg-gray-900 text-white pt-16 pb-8">
       <div className="container mx-auto px-6">
@@ -55,19 +59,16 @@ const Footer = () => {
             <h3 className="text-lg font-semibold mb-6">Quick Links</h3>
             <ul className="space-y-3">
               <li>
-                <a href="#home" className="text-gray-400 hover:text-techhub-light-purple transition-colors">Home</a>
+                <Link to="/" className="text-gray-400 hover:text-techhub-light-purple transition-colors">Home</Link>
               </li>
               <li>
-                <a href="#about" className="text-gray-400 hover:text-techhub-light-purple transition-colors">About Us</a>
+                <Link to="/#about" className="text-gray-400 hover:text-techhub-light-purple transition-colors">About Us</Link>
               </li>
               <li>
-                <a href="#team" className="text-gray-400 hover:text-techhub-light-purple transition-colors">Our Team</a>
+                <Link to="/sessions" className="text-gray-400 hover:text-techhub-light-purple transition-colors">Sessions</Link>
               </li>
               <li>
-                <a href="#join" className="text-gray-400 hover:text-techhub-light-purple transition-colors">Join Us</a>
-              </li>
-              <li>
-                <a href="#" className="text-gray-400 hover:text-techhub-light-purple transition-colors">Events</a>
+                <Link to="/join" className="text-gray-400 hover:text-techhub-light-purple transition-colors">Join Us</Link>
               </li>
             </ul>
           </div>
@@ -76,16 +77,16 @@ const Footer = () => {
             <h3 className="text-lg font-semibold mb-6">Resources</h3>
             <ul className="space-y-3">
               <li>
-                <a href="#" className="text-gray-400 hover:text-techhub-light-purple transition-colors">DSA Roadmap</a>
+                <a href="https://leetcode.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-techhub-light-purple transition-colors">LeetCode</a>
               </li>
               <li>
-                <a href="#" className="text-gray-400 hover:text-techhub-light-purple transition-colors">Web Development Guide</a>
+                <a href="https://codeforces.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-techhub-light-purple transition-colors">Codeforces</a>
               </li>
               <li>
-                <a href="#" className="text-gray-400 hover:text-techhub-light-purple transition-colors">Practice Resources</a>
+                <a href="https://codechef.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-techhub-light-purple transition-colors">CodeChef</a>
               </li>
               <li>
-                <a href="#" className="text-gray-400 hover:text-techhub-light-purple transition-colors">Technical Interview Prep</a>
+                <a href="https://geeksforgeeks.org" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-techhub-light-purple transition-colors">GeeksForGeeks</a>
               </li>
             </ul>
           </div>
@@ -93,13 +94,18 @@ const Footer = () => {
           <div>
             <h3 className="text-lg font-semibold mb-6">Contact Us</h3>
             <ul className="space-y-4">
-              <li className="flex items-center">
+              <li className="flex items-center cursor-pointer" onClick={handleWhatsAppClick}>
                 <Phone className="h-5 w-5 text-techhub-light-purple mr-3" />
-                <span className="text-gray-400">7668759906</span>
+                <span className="text-gray-400 hover:text-white transition-colors">7668759906</span>
               </li>
               <li className="flex items-center">
                 <Mail className="h-5 w-5 text-techhub-light-purple mr-3" />
-                <span className="text-gray-400">info@techhub.community</span>
+                <a 
+                  href="mailto:info@techhub.community" 
+                  className="text-gray-400 hover:text-white transition-colors"
+                >
+                  info@techhub.community
+                </a>
               </li>
               <li className="flex items-center">
                 <MapPin className="h-5 w-5 text-techhub-light-purple mr-3" />
