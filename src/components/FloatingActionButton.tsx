@@ -1,20 +1,58 @@
 
-import { MessageSquare } from 'lucide-react';
+import { MessageSquare, ArrowUp } from 'lucide-react';
+import { useState, useEffect } from 'react';
 
 const FloatingActionButton = () => {
+  const [showScrollTop, setShowScrollTop] = useState(false);
+  
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 500) {
+        setShowScrollTop(true);
+      } else {
+        setShowScrollTop(false);
+      }
+    };
+    
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   const handleWhatsAppClick = () => {
     window.open('https://wa.me/917668759906', '_blank');
   };
 
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  };
+
   return (
-    <button
-      onClick={handleWhatsAppClick}
-      className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-gradient-to-r from-techhub-purple to-techhub-blue text-white shadow-lg hover:shadow-xl transform hover:scale-110 transition-all duration-300 flex items-center justify-center"
-      aria-label="Join via WhatsApp"
-    >
-      <MessageSquare className="h-6 w-6" />
-      <span className="sr-only">Join via WhatsApp</span>
-    </button>
+    <div className="fixed bottom-6 right-6 z-50 flex flex-col gap-4">
+      <button
+        onClick={handleWhatsAppClick}
+        className="w-14 h-14 rounded-full bg-gradient-to-r from-techhub-purple to-techhub-blue text-white shadow-lg hover:shadow-xl transform hover:scale-110 transition-all duration-300 flex items-center justify-center relative overflow-hidden group"
+        aria-label="Join via WhatsApp"
+      >
+        <MessageSquare className="h-6 w-6 relative z-10" />
+        <span className="sr-only">Join via WhatsApp</span>
+        {/* Animated neon glow effect */}
+        <div className="absolute inset-0 bg-gradient-to-r from-techhub-purple to-techhub-blue opacity-0 group-hover:opacity-70 blur-xl transition-opacity duration-500"></div>
+      </button>
+
+      {showScrollTop && (
+        <button
+          onClick={scrollToTop}
+          className="w-14 h-14 rounded-full bg-white/20 backdrop-blur-md border border-white/30 text-white shadow-lg hover:shadow-xl transform hover:scale-110 transition-all duration-300 flex items-center justify-center animate-fade-in"
+          aria-label="Back to top"
+        >
+          <ArrowUp className="h-6 w-6" />
+          <span className="sr-only">Back to top</span>
+        </button>
+      )}
+    </div>
   );
 };
 

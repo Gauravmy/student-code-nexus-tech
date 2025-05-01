@@ -2,6 +2,7 @@
 import { Card } from '@/components/ui/card';
 import { Code, ExternalLink } from 'lucide-react';
 import { useState } from 'react';
+import { useInView } from 'react-intersection-observer';
 
 const PlatformsSection = () => {
   const platforms = [
@@ -32,11 +33,15 @@ const PlatformsSection = () => {
   ];
 
   const [hoveredCard, setHoveredCard] = useState<string | null>(null);
+  const { ref, inView } = useInView({
+    triggerOnce: true,
+    threshold: 0.1,
+  });
 
   return (
-    <section className="py-16 bg-gradient-to-br from-techhub-soft-purple to-techhub-soft-blue dark:from-purple-900/20 dark:to-blue-900/20">
+    <section ref={ref} className="py-16 bg-gradient-to-br from-techhub-soft-purple to-techhub-soft-blue dark:from-purple-900/20 dark:to-blue-900/20">
       <div className="container mx-auto px-6">
-        <div className="text-center mb-16">
+        <div className={`text-center mb-16 transition-all duration-1000 ${inView ? 'opacity-100' : 'opacity-0 translate-y-10'}`}>
           <h2 className="text-3xl md:text-4xl font-bold mb-4 font-poppins animate-fade-in">Platforms We Cover</h2>
           <p className="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto animate-fade-in animate-delay-100">
             Our sessions cover problems and concepts from these leading coding platforms. 
@@ -51,12 +56,19 @@ const PlatformsSection = () => {
               target="_blank" 
               rel="noopener noreferrer" 
               key={platform.name}
-              className="transform transition-all duration-500 hover:scale-105"
+              className={`transform transition-all duration-700 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'}`}
+              style={{ transitionDelay: `${index * 100}ms` }}
               onMouseEnter={() => setHoveredCard(platform.name)}
               onMouseLeave={() => setHoveredCard(null)}
-              style={{ animationDelay: `${index * 100}ms` }}
             >
-              <Card className={`glass-card rounded-xl shadow-lg overflow-hidden h-full flex flex-col ${hoveredCard === platform.name ? 'shadow-xl' : ''} animate-scale-in`}>
+              <Card className={`backdrop-blur-lg bg-white/30 dark:bg-gray-900/30 border border-white/30 dark:border-white/5 rounded-xl shadow-lg overflow-hidden h-full flex flex-col relative group ${
+                hoveredCard === platform.name ? 'shadow-xl' : ''
+              }`}>
+                {/* Glow effect on hover */}
+                <div className={`absolute inset-0 ${platform.color.replace('bg-', 'bg-')} opacity-0 blur-2xl transition-opacity duration-500 -z-10 ${
+                  hoveredCard === platform.name ? 'opacity-30' : ''
+                }`}></div>
+                
                 <div className={`${platform.color} h-2 w-full`}></div>
                 <div className="p-6 flex-1 flex flex-col">
                   <div className="flex items-center justify-between mb-4">
@@ -70,6 +82,11 @@ const PlatformsSection = () => {
                     Visit Platform <ExternalLink className="ml-2 h-4 w-4" />
                   </div>
                 </div>
+                
+                {/* Animated neon border on hover */}
+                <div className={`absolute inset-0 border border-transparent transition-all duration-500 ${
+                  hoveredCard === platform.name ? `border-${platform.color.replace('bg-', '')} shadow-[0_0_15px_rgba(var(--${platform.color.replace('bg-', '')}-rgb),0.7)]` : ''
+                }`}></div>
               </Card>
             </a>
           ))}
