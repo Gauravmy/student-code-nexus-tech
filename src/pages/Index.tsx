@@ -8,6 +8,7 @@ import TestimonialsSection from "@/components/TestimonialsSection";
 import EventsSection from "@/components/EventsSection";
 import PlatformsSection from "@/components/PlatformsSection";
 import Footer from "@/components/Footer";
+import FloatingActionButton from "@/components/FloatingActionButton";
 
 const Index = () => {
   return (
@@ -21,6 +22,7 @@ const Index = () => {
       <EventsSection />
       <JoinSection />
       <Footer />
+      <FloatingActionButton />
     </div>
   );
 };

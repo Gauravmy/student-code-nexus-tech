@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import SessionsContent from "@/components/SessionsContent";
 import PlatformsSection from "@/components/PlatformsSection";
 import { Toaster } from "@/components/ui/toaster";
+import FloatingActionButton from "@/components/FloatingActionButton";
 
 const Sessions = () => {
   return (
@@ -14,6 +15,7 @@ const Sessions = () => {
       <PlatformsSection />
       <Footer />
       <Toaster />
+      <FloatingActionButton />
     </div>
   );
 };

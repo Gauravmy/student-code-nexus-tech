@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, Code, BookOpen } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import ThemeToggle from '@/components/ThemeToggle';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -26,7 +27,7 @@ const Navbar = () => {
   return (
     <header 
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-white/90 shadow-md backdrop-blur-md' : 'bg-transparent'
+        isScrolled ? 'bg-white/90 dark:bg-gray-900/90 shadow-md backdrop-blur-md' : 'bg-transparent'
       }`}
     >
       <nav className="container mx-auto px-6 py-4">
@@ -81,14 +82,16 @@ const Navbar = () => {
             >
               Join Us
             </Link>
-            <Button className="bg-techhub-purple hover:bg-techhub-light-purple" onClick={handleWhatsAppClick}>
+            <ThemeToggle />
+            <Button className="bg-techhub-purple hover:bg-techhub-light-purple transform hover:scale-105 transition-all" onClick={handleWhatsAppClick}>
               <BookOpen className="mr-2 h-4 w-4" />
               Join Now
             </Button>
           </div>
 
           {/* Mobile menu button */}
-          <div className="md:hidden">
+          <div className="md:hidden flex items-center space-x-4">
+            <ThemeToggle />
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className="p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-techhub-purple"
